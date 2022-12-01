@@ -10,24 +10,26 @@ import pandas as pd
 
 #import data
 df = pd.read_excel("../Data/BigSphere.xlsx")
+R = 0.03175
 print(df)
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-x = x[300:]
-time = np.log(x)
+x = x[100:600]
+time = x
 # y-axis
 y = df['Temperature @ r=0 [C]'].to_numpy()
-y = y[300:]
+y = y[100:600]
 temp = np.log(y)
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
-print(a,b)
-print(np.exp(a),np.exp(b))
+print( (np.power(R,2)/ np.power(np.pi,2)) *  a)
+print((np.power(R,2)/ np.power(np.pi,2)) * np.exp(a) )
 #add points to plot
-plt.scatter(x, y)
+fig = plt.figure()
+ax = plt.gca()
+ax.scatter(x, y)
 #add line of best fit to plot
-plt.plot(x, np.exp(a*time + b ))        
-#log scale
-plt.loglog()
+ax.plot(x, np.exp(a*time + b))        
+ax.set_yscale('log')
