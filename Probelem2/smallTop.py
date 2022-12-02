@@ -10,24 +10,23 @@ import pandas as pd
 
 #import data
 df = pd.read_excel("../Data/SmallSphere.xlsx")
-print(df)
+R = 0.03175
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-x = x[700:738]
-time = np.log(x)
+time = x[120:500]
 # y-axis
 y = df['Temperature @ r=0 [C]'].to_numpy()
-y = y[700:738]
-temp = np.log(y)
+temp = np.log(y[120:500])
+
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
-print(a,b)
-print(np.exp(a),np.exp(b))
+print( (np.power(R,2)/ np.power(np.pi,2)) *  a)
 #add points to plot
-plt.scatter(x, y)
+fig = plt.figure()
+ax = plt.gca()
+ax.scatter(x, y)
 #add line of best fit to plot
-plt.plot(x, np.exp(a*time + b ))        
-#log scale
-plt.loglog()
+ax.plot(time, np.exp(a*time + b), 'ro')        
+ax.set_yscale('log')

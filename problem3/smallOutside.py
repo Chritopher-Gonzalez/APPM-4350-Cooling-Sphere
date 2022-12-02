@@ -10,16 +10,16 @@ from scipy.integrate import quad
 from math import* #import all function from math
 
 #define constants
-n = 500
-R = 0.03175 #radius of large sphere in meters
+n = 5
+R = 0.0238125 #radius of large sphere in meters
 T = 239
-k = 4.53304e-06 #thermal diffusivity
-Tr = 18.023
-Tb = 0.067
+k = 4.03428e-06 #thermal diffusivity
+Tr = 22.025
+Tb = -0.024
 
 #define range
 #r = np.arange(0, R, R/956)
-r = 0
+r = R/2
 t = np.arange(0, T, 0.25)
 
 #calc coefficents
@@ -33,7 +33,7 @@ for i in range(n):
 Bn=[]
 
 for i in range(n):
-    bn =  np.sinc((np.pi * r *i) / R)
+    bn =  np.sinc((r * i) / R)
     Bn.append(bn)
 
 #calc coefficents
@@ -52,8 +52,8 @@ for i in range(n):
         sol += Tb
     else:
         sol += An[i] * Bn [i] * np.power(Cn[i], t)
-    
-print(sol)
+        
+print(Bn)  
 #add points to plot
 fig = plt.figure()
 ax = plt.gca()
