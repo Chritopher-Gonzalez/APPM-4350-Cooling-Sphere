@@ -4,22 +4,26 @@ Created on Wed Nov 30 18:35:51 2022
 
 @author: Christopher
 """
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import quad
 from math import* #import all function from math
+
+#load data
+df = pd.read_excel("../Data/SmallSphere.xlsx")
 
 #define constants
 n = 5
 R = 0.0238125 #radius of large sphere in meters
 T = 239
 k = 4.03428e-06 #thermal diffusivity
-Tr = 22.025
-Tb = -0.024
+Tr = 22.029
+Tb = -0.0759
 
 #define range
 #r = np.arange(0, R, R/956)
-r = R/2
+r = 0
 t = np.arange(0, T, 0.25)
 
 #calc coefficents
@@ -33,7 +37,7 @@ for i in range(n):
 Bn=[]
 
 for i in range(n):
-    bn =  np.sinc((r * i) / R)
+    bn =  np.sinc((np.pi * r *i) / R)
     Bn.append(bn)
 
 #calc coefficents
@@ -52,10 +56,16 @@ for i in range(n):
         sol += Tb
     else:
         sol += An[i] * Bn [i] * np.power(Cn[i], t)
-        
-print(Bn)  
+    
+print(sol)     
 #add points to plot
+
+#process data
+x = df['Time [sec]'].to_numpy()
+y = df['Temperature @ r=0 [C]'].to_numpy()
+
 fig = plt.figure()
 ax = plt.gca()
 ax.plot(t, sol,'g')  
+ax.plot(x, y,'b')  
 ax.set_yscale('log')

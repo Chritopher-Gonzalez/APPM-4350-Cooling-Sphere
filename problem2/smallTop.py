@@ -9,16 +9,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 #import data
-df = pd.read_excel("../Data/BigSphere.xlsx")
+df = pd.read_excel("../data/SmallSphere.xlsx")
 R = 0.03175
-#print(df)
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-time = x[50:350]
+time = x[120:500]
 # y-axis
-y = df['Temperature @ r=R/2 [C]'].to_numpy()
-temp = np.log(y[50:350])
+y = df['Temperature @ r=0 [C]'].to_numpy()
+temp = np.log(y[120:500])
+
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)

@@ -7,9 +7,9 @@ Created on Wed Nov 30 18:35:51 2022
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import quad
 from math import* #import all function from math
 
+#load data
 df = pd.read_excel("../Data/BigSphere.xlsx")
 
 #define constants
@@ -67,4 +67,4 @@ fig = plt.figure()
 ax = plt.gca()
 ax.plot(t, sol,'g')  
 ax.plot(x, y,'b')  
-#ax.set_yscale('log')
+ax.set_yscale('log')

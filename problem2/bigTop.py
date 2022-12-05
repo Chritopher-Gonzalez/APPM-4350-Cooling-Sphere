@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 #import data
-df = pd.read_excel("../Data/BigSphere.xlsx")
+df = pd.read_excel("../data/BigSphere.xlsx")
 R = 0.03175
 #print(df)
 #process data
