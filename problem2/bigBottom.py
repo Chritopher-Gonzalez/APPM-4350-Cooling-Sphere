@@ -15,18 +15,22 @@ R = 0.03175
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-time = x[50:350]
+time = x[350:550]
 # y-axis
 y = df['Temperature @ r=R/2 [C]'].to_numpy()
-temp = np.log(y[50:350])
+temp = np.log(y[350:550])
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
-print( (np.power(R,2)/ np.power(np.pi,2)) *  a)
+print(-1 * (np.power(R,2)/ np.power(np.pi,2)) *  a)
 #add points to plot
 fig = plt.figure()
 ax = plt.gca()
-ax.scatter(x, y)
+ax.scatter(x, y,  label='data')
 #add line of best fit to plot
-ax.plot(time, np.exp(a*time + b), 'ro')        
+ax.plot(time, np.exp(a*time + b), 'ro', label='linear Fit')        
 ax.set_yscale('log')
+ax.legend()
+ax.set_title('Big Sphere Time [sec] vs Temperature @ r=R/2 [C]')
+ax.set_ylabel('Temperature @ r=R/2 [C]')
+ax.set_xlabel("Time [sec]")
