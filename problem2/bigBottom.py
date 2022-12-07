@@ -15,10 +15,10 @@ R = 0.03175
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-time = x[350:550]
+time = x[100:500]
 # y-axis
 y = df['Temperature @ r=R/2 [C]'].to_numpy()
-temp = np.log(y[350:550])
+temp = np.log(y[100:500])
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)

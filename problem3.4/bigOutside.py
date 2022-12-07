@@ -13,12 +13,12 @@ from math import* #import all function from math
 df = pd.read_excel("../Data/BigSphere.xlsx")
 
 #define constants
-n = 5
+n = 50
 R = 0.03175 #radius of large sphere in meters
 T = 239
-k = 4.53304e-06 #thermal diffusivity
+k = 2.9824082528883503e-06 #thermal diffusivity
 Tr = 18.021
-Tb = 0.138
+Tb = 0
 
 #define range
 #r = np.arange(0, R, R/956)
@@ -64,6 +64,11 @@ y = df['Temperature @ r=R/2 [C]'].to_numpy()
 
 fig = plt.figure()
 ax = plt.gca()
-ax.plot(t, sol,'g')  
-ax.plot(x, y,'b')  
+ax.plot(t, sol,'g', label='Theoretical')  
+ax.plot(x, y,'b', label='Actual')  
 ax.set_yscale('log')
+
+ax.legend()
+ax.set_title('Big Sphere Time [sec] vs Temperature @ r=R/2 [C]')
+ax.set_ylabel('Temperature @ r=R/2 [C]')
+ax.set_xlabel("Time [sec]")

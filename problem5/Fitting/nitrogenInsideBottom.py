@@ -9,15 +9,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 #import data
-df = pd.read_excel("../data/SmallSphereNitrogen.xlsx")
+df = pd.read_excel("../../data/SmallSphereNitrogen.xlsx")
 R = 0.03175
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-time = x[300:360]
+
+time = x[400:600]
 # y-axis
 y = -1 * df['Temperature @ r=0 [C]'].to_numpy()
-temp = np.log(y[300:360])
+temp = np.log(y[400:600])
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
@@ -25,7 +26,12 @@ print( (np.power(R,2)/ np.power(np.pi,2)) *  a)
 #add points to plot
 fig = plt.figure()
 ax = plt.gca()
-ax.scatter(x, y)
+ax.scatter(x, y, label='data')
 #add line of best fit to plot
-ax.plot(time, np.exp(a*time + b), 'ro')        
+ax.plot(time, np.exp(a*time + b), 'ro', label='linear Fit')   
 ax.set_yscale('symlog')
+
+ax.legend()
+ax.set_title('Small Sphere Nitrogen Time [sec] vs Temperature @ r=0 [C]')
+ax.set_ylabel('Temperature @ r=0 [C]')
+ax.set_xlabel("Time [sec]")

@@ -7,29 +7,30 @@ Created on Wed Nov 30 18:35:51 2022
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import quad
 from math import* #import all function from math
 
 #load data
-df = pd.read_excel("../Data/BigSphere.xlsx")
+df = pd.read_excel("../Data/SmallSphereNitrogen.xlsx")
 
 #define constants
 n = 50
-R = 0.03175 #radius of large sphere in meters
+R = 0.0238125 #radius of large sphere in meters
 T = 239
-k = 3.1353289463378336e-06 #thermal diffusivity
-Tr = 18.023
-Tb = 0.067
+k = 1.745468208411618e-05 #thermal diffusivity
+Tr = -1.468
+Tb = -194.919
 
 #define range
 #r = np.arange(0, R, R/956)
-r = 0
+r = R/2
 t = np.arange(0, T, 0.25)
 
 #calc coefficents
 An=[]
 
 for i in range(n):
-    an = (-2 * np.power(-1, i)) * (Tr - Tb)
+    an = -2 * np.power(-1, i) * (Tr - Tb)
     An.append(an) 
  
 #calc coefficents
@@ -55,21 +56,21 @@ for i in range(n):
         sol += Tb
     else:
         sol += An[i] * Bn [i] * np.power(Cn[i], t)
-   
+        
 print(sol)     
 #add points to plot
 
 #process data
 x = df['Time [sec]'].to_numpy()
-y = df['Temperature @ r=0 [C]'].to_numpy()
+y = df['Temperature @ r=R/2 [C]'].to_numpy()
 
 fig = plt.figure()
 ax = plt.gca()
 ax.plot(t, sol,'g', label='Theoretical')  
 ax.plot(x, y,'b', label='Actual')  
-ax.set_yscale('log')
+ax.set_yscale('symlog')
 
 ax.legend()
-ax.set_title('Big Sphere Time [sec] vs Temperature @ r=0 [C]')
-ax.set_ylabel('Temperature @ r=0 [C]')
+ax.set_title('Big Sphere Time [sec] vs Temperature @ r=R/2 [C]')
+ax.set_ylabel('Temperature @ r=R/2 [C]')
 ax.set_xlabel("Time [sec]")
