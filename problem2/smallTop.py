@@ -14,14 +14,15 @@ R = 0.03175
 #process data
 # x-axis
 x = df['Time [sec]'].to_numpy()
-time = x[100:500]
+time = x[0:150]
 # y-axis
 y = df['Temperature @ r=0 [C]'].to_numpy()
-temp = np.log(y[100:500])
+temp = np.log(y[0:150])
 
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
+print(a,b)
 print( -1 * (np.power(R,2)/ np.power(np.pi,2)) *  a)
 #add points to plot
 fig = plt.figure()

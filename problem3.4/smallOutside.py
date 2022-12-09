@@ -17,7 +17,7 @@ df = pd.read_excel("../Data/SmallSphere.xlsx")
 n = 50
 R = 0.0238125 #radius of small sphere in meters
 T = 239
-k = 3.0460248005677813e-06 #thermal diffusivity
+k = 2.8193829984751584e-06 #thermal diffusivity
 Tr = 22.025
 Tb = -0.024
 

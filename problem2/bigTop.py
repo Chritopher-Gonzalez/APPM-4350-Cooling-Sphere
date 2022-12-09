@@ -22,6 +22,7 @@ temp = np.log(y[100:500])
 
 #find line of best fit
 a, b = np.polyfit(time, temp, 1)
+print(a,b)
 print( -1 * (np.power(R,2)/ np.power(np.pi,2)) *  a)
 #add points to plot
 fig = plt.figure()

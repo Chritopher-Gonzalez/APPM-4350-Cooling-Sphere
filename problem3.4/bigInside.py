@@ -18,7 +18,7 @@ R = 0.03175 #radius of large sphere in meters
 T = 239
 k = 3.1353289463378336e-06 #thermal diffusivity
 Tr = 18.023
-Tb = 0.067
+Tb = 0.0670000000000246
 
 #define range
 #r = np.arange(0, R, R/956)
